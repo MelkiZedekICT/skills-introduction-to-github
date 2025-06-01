@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}Home - News{% endblock %}
+
+{% block content %}
+  <h2>Latest News</h2>
+  {% if error_message %}
+    <p class="error">{{ error_message }}</p>
+  {% endif %}
+  <div class="articles">
+    {% if articles %}
+      {% for article in articles %}
+        <article class="news-article">
+          <h3><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+          <p class="category"><strong>Category:</strong> {{ article.category | default('N/A') }}</p>
+          <p class="summary"><strong>Summary:</strong> {{ article.summary | default('N/A') }}</p>
+          <p class="description"><em>{{ article.description | default('') }}</em></p>
+          <small>Published: {{ article.publishedAt }}</small>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>No news articles to display at the moment.</p>
+    {% endif %}
+  </div>
+{% endblock %}
